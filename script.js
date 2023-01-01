@@ -42,9 +42,6 @@ function convert() {
     // Use the FileReader API to read the file as a binary string
     var reader = new FileReader();
     reader.onload = function() {
-      // Convert the binary string to a base64-encoded string
-      var base64 = btoa(reader.result);
-
       // Use jsPDF to convert the base64-encoded PDF to a Word document
       var doc = new jsPDF();
       doc.output("datauri").then(function(uri) {
