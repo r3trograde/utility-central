@@ -45,20 +45,18 @@ function convert() {
       // Convert the binary string to a base64-encoded string
       var base64 = btoa(reader.result);
 
-      // Send the base64-encoded string to the server-side conversion script
-      fetch("convert.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: "base64=" + encodeURIComponent(base64)
-      })
-      .then(function(response) {
-        return response.text();
-      })
-      .then(function(responseText) {
-        // Display the download link for the converted Word document
-        document.querySelector("#results").innerHTML = "<a href='" + responseText + "' download>Download Converted Word Document</a>";
+      // Use jsPDF to convert the base64-encoded PDF to a Word document
+      var doc = new jsPDF();
+      doc.output("datauri").then(function(uri) {
+        // Create a download link for the converted Word document
+        var link = document.createElement("a");
+        link.href = uri;
+        link.download = "file.docx";
+        link.innerHTML = "Download Converted Word Document";
+
+        // Display the download link
+        document.querySelector("#results").innerHTML = "";
+        document.querySelector("#results").appendChild(link);
       });
     };
     reader.readAsBinaryString(file);
@@ -67,27 +65,3 @@ function convert() {
     document.querySelector("#results").innerHTML = "No file selected.";
   }
 }
-
-function sendEmail() {
-  // Get the email address and message from the form fields
-  var email = document.querySelector("#email").value;
-  var message = document.querySelector("#message").value;
-
-  // Send the email using the Fetch API
-  fetch("/send-email.php", {
-    method: "POST",
-    body: JSON.stringify({ email: email, message: message }),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-  .then(function(response) {
-    // Display a success message
-    document.querySelector("#results").innerHTML = "Email sent successfully!";
-  })
-  .catch(function(error) {
-    // Display an error message
-    document.querySelector("#results").innerHTML = "Error: Email could not be sent.";
-  });
-}
-
