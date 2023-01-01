@@ -12,7 +12,7 @@ function convert() {
     reader.onload = function() {
       // Use jsPDF to convert the base64-encoded PDF to a Word document
       var doc = new jsPDF();
-      doc.output("datauri").then(function(uri) {
+      doc.save("file.docx").then(function(uri) {
         // Create a download link for the converted Word document
         var link = document.createElement("a");
         link.href = uri;
