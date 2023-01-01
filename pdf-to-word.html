@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Business Name Generator | Utility Central</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Business Name Generator</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="pdf-to-word.html">PDF to Word Converter</a></li>
+      <li><a href="business-name-gen.html" class="active">Business Name Generator</a></li>
+      <li><a href="contact-page.html">Contact Us</a></li>
+    </ul>
+  </nav>
+  <main>
+    <h2>PDF to Word Converter</h2>
+    <p>Convert your PDF files to editable Word documents with our easy-to-use tool. Simply select your file, wait a few seconds, and download the converted document.</p>
+    <form>
+      <label for="file">Select PDF file:</label><br>
+      <input type="file" id="file" accept=".pdf"><br>
+      <button type="button" onclick="convert()">Convert</button>
+    </form>
+    <h2>Results:</h2>
+    <div id="results"></div>
+  </main>
+  <footer>
+    <p>Copyright 2023 Utility Central</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
