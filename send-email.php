@@ -1,17 +1,17 @@
 <?php
   // Get the email address and message from the POST request
-  $email = $_POST['email'];
-  $message = $_POST['message'];
+  $email = $_POST["email"];
+  $message = $_POST["message"];
 
   // Set the recipient email address
   $to = "utilitycentral101@gmail.com";
 
   // Set the email subject and body
-  $subject = "Message from Utility Central";
-  $body = "Email: $email\n\nMessage:\n$message";
+  $subject = "Message from $email";
+  $body = $message;
 
   // Set the headers
-  $headers = "From: Utility Central <noreply@utilitycentral.com>\r\n";
+  $headers = "From: $email\r\n";
   $headers .= "Reply-To: $email\r\n";
 
   // Send the email
