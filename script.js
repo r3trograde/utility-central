@@ -67,3 +67,27 @@ function convert() {
     document.querySelector("#results").innerHTML = "No file selected.";
   }
 }
+
+function sendEmail() {
+  // Get the email address and message from the form fields
+  var email = document.querySelector("#email").value;
+  var message = document.querySelector("#message").value;
+
+  // Send the email using the Fetch API
+  fetch("/send-email.php", {
+    method: "POST",
+    body: JSON.stringify({ email: email, message: message }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(function(response) {
+    // Display a success message
+    document.querySelector("#results").innerHTML = "Email sent successfully!";
+  })
+  .catch(function(error) {
+    // Display an error message
+    document.querySelector("#results").innerHTML = "Error: Email could not be sent.";
+  });
+}
+
