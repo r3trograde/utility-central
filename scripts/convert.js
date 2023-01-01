@@ -10,12 +10,15 @@ function convert() {
     // Use the FileReader API to read the file as a binary string
     var reader = new FileReader();
     reader.onload = function() {
-      // Use jsPDF to convert the base64-encoded PDF to a Word document
-      var doc = new jsPDF();
-      doc.save("file.docx").then(function(uri) {
+      // Convert the binary string to a base64-encoded string
+      var base64 = btoa(reader.result);
+
+      // Use docxgen to convert the base64-encoded PDF to a Word document
+      var doc = new Docxgen();
+      doc.loadFromBase64(base64).then(function() {
         // Create a download link for the converted Word document
         var link = document.createElement("a");
-        link.href = uri;
+        link.href = doc.getDataUri();
         link.download = "file.docx";
         link.innerHTML = "Download Converted Word Document";
 
