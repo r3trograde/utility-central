@@ -11,7 +11,8 @@
   </script>
   <title>PDF to Word Converter | Utility Central</title>
   <link rel="stylesheet" type="text/css" href="styles/styles.css">
-  <script src="scripts/convert.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.min.js"></script>
+  <script src="pdf-to-word-worker/index.js"></script>
 </head>
 <body>
   <header>
@@ -27,13 +28,13 @@
     </ul>
   </nav>
   <main>
-    <h2>UNDER CONSTRUCTION</h2>
-    <!-- <form id="converter-form">
+    <h2>Upload and convert your PDF file here:</h2>
+    <form id="converter-form">
       <input type="file" id="pdf-file" accept=".pdf">
       <button type="submit">Convert</button>
     </form>
     <a id="download-link" style="display: none;">Download DOCX</a>
-  </main> -->
+  </main>
   <footer>
     <p>Copyright 2023 Utility Central</p>
   </footer>
