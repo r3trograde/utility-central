@@ -9,30 +9,32 @@
 
     gtag('config', 'G-9EJLVZQWT4');
   </script>
-  <title>Business Name Generator | Utility Central</title>
+  <title>QR Code Generator | Utility Central</title>
   <link rel="stylesheet" type="text/css" href="styles/styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-  <script src="scripts/generate-name.js"></script>
-  <li><a href="plagiarism-detect.html">Plagiarism Detector</a></li>
+  <script src="scripts/plag-detect.js"></script>
 </head>
 <body>
   <header>
-    <h1>Business Name Generator</h1>
+    <h1>QR Code Generator</h1>
   </header>
   <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="pdf-to-word.html">PDF to Word Converter</a></li>
-      <li><a href="business-name-gen.html" class="active">Business Name Generator</a></li>
+      <li><a href="business-name-gen.html">Business Name Generator</a></li>
       <li><a href="qr-code-gen.html">QR Code Generator</a></li>
+      <li><a href="plagiarism-detect.html" class="active">Plagiarism Detector</a></li>
     </ul>
   </nav>
   <main>
-    <h2>Generate a Business Name:</h2>
+    <h2>Check for plagiarism:</h2>
     <form>
-      <button type="button" onclick="generateName()">Generate</button>
+      <label for="textInput">Enter text to check for plagiarism:</label>
+      <br>
+      <textarea id="textInput" rows="4" cols="50"></textarea>
+      <br>
+      <input type="button" value="Check for Plagiarism" onclick="checkPlagiarism()">
     </form>
-    <h2>Results:</h2>
     <div id="results"></div>
   </main>
   <footer>
