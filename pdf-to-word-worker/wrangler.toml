@@ -1,0 +1,8 @@
+name = "pdf-to-word-worker"
+type = "javascript"
+
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
+compatibility_date = "2023-01-02"
