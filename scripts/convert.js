@@ -1,35 +1,61 @@
-function convert() {
-  // Get the selected PDF file from the input element
-  var file = document.querySelector("#file").files[0];
+function pdfToDocxConverter() {
+  const form = document.getElementById('converter-form');
+  const pdfFileInput = document.getElementById('pdf-file');
+  const downloadLink = document.getElementById('download-link');
 
-  // Check if a file was selected
-  if (file) {
-    // Display a loading message
-    document.querySelector("#results").innerHTML = "Converting... Please wait.";
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-    // Use the FileReader API to read the file as a binary string
-    var reader = new FileReader();
-    reader.onload = function() {
-      // Convert the binary string to a base64-encoded string
-      var base64 = btoa(reader.result);
+    // Check if a PDF file has been selected
+    if (!pdfFileInput.files[0]) {
+      alert('Please select a PDF file to convert.');
+      return;
+    }
 
-      // Use docxgen to convert the base64-encoded PDF to a Word document
-      var doc = new Docxgen();
-      doc.loadFromBase64(base64).then(function() {
-        // Create a download link for the converted Word document
-        var link = document.createElement("a");
-        link.href = doc.getDataUri();
-        link.download = "file.docx";
-        link.innerHTML = "Download Converted Word Document";
+    // Convert the PDF to a DOCX
+    const pdfFile = pdfFileInput.files[0];
+    const docxFile = await convertPdfToDocx(pdfFile);
 
-        // Display the download link
-        document.querySelector("#results").innerHTML = "";
-        document.querySelector("#results").appendChild(link);
-      });
-    };
-    reader.readAsBinaryString(file);
-  } else {
-    // Display an error message if no file was selected
-    document.querySelector("#results").innerHTML = "No file selected.";
+    // Update the download link with the converted DOCX file
+    downloadLink.href = URL.createObjectURL(docxFile);
+    downloadLink.download = pdfFile.name.replace('.pdf', '.docx');
+    downloadLink.style.display = 'inline-block';
+  });
+
+  async function convertPdfToDocx(pdfFile) {
+    // Check if the browser supports the `PDF` and `FileReader` APIs
+    if (!window.PDF || !window.FileReader) {
+      alert('This browser does not support the PDF or FileReader APIs.');
+      return;
+    }
+
+    // Read the PDF file as an ArrayBuffer
+    const pdfArrayBuffer = await new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.onload = () => resolve(fileReader.result);
+      fileReader.onerror = reject;
+      fileReader.readAsArrayBuffer(pdfFile);
+    });
+
+    // Convert the PDF ArrayBuffer to a PDF.js `PDFDocument`
+    const pdf = await PDF.load(pdfArrayBuffer);
+
+    // Convert the PDF.js `PDFDocument` to a Microsoft Word `Document`
+    const doc = new window.DOCX.Document();
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = pdf.getPage(i);
+      const textContent = await page.getTextContent();
+      const paragraphs = textContent.items.map((item) => item.str);
+      doc.addParagraph(paragraphs.join('\n'));
+    }
+
+    // Convert the Microsoft Word `Document` to a DOCX `Blob`
+    const docxBlob = await doc.save();
+
+    // Return the DOCX `Blob`
+    return docxBlob;
   }
 }
+
+// Initialize the converter when the page is loaded
+window.addEventListener('load', pdfToDocxConverter);

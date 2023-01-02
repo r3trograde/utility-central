@@ -11,7 +11,6 @@
   </script>
   <title>PDF to Word Converter | Utility Central</title>
   <link rel="stylesheet" type="text/css" href="styles/styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/docxgen@1.3.6/dist/docxgen.min.js"></script>
   <script src="scripts/convert.js"></script>
 </head>
 <body>
@@ -26,15 +25,12 @@
     </ul>
   </nav>
   <main>
-    <h2>UNDER CONSTRUCTION</h2>
-    <!-- <p>Convert your PDF files to editable Word documents with our easy-to-use tool. Simply select your file, wait a few seconds, and download the converted document.</p>
-    <form>
-      <label for="file">Select PDF file:</label><br>
-      <input type="file" id="file" accept=".pdf"><br>
-      <button type="button" onclick="convert()">Convert</button>
+    <h2>Convert your file by uploading your PDF file below and hitting convert!</h2>
+    <form id="converter-form">
+      <input type="file" id="pdf-file" accept=".pdf">
+      <button type="submit">Convert</button>
     </form>
-    <h2>Results:</h2>
-    <div id="results"></div> -->
+    <a id="download-link" style="display: none;">Download DOCX</a>
   </main>
   <footer>
     <p>Copyright 2023 Utility Central</p>
