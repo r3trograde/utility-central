@@ -35,6 +35,29 @@
     </form>
     <a id="download-link" style="display: none;">Download DOCX</a>
   </main>
+  <script>
+    const form = document.getElementById('converter-form');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+  
+      // Get the selected PDF file
+      const pdfFile = document.getElementById('pdf-file').files[0];
+  
+      // Trigger the fetch event with the PDF file as the request body
+      fetch(new Request('/', {
+        method: 'POST',
+        body: pdfFile,
+      })).then((response) => {
+        // Create an object URL for the DOCX Blob
+        const objectUrl = URL.createObjectURL(response.blob());
+
+        // Update the "download-link" element with the object URL
+        const downloadLink = document.getElementById('download-link');
+        downloadLink.href = objectUrl;
+        downloadLink.style.display = 'inline';
+      });
+    });
+  </script>
   <footer>
     <p>Copyright 2023 Utility Central</p>
   </footer>

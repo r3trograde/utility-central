@@ -3,6 +3,9 @@ addEventListener('fetch', event => {
 });
 
 async function handleRequest(request) {
+  // Extract the file name from the request headers
+  const fileName = request.headers.get('pdf-file-name');
+
   // Convert the PDF to a DOCX
   const pdfArrayBuffer = await new Promise((resolve, reject) => {
     const fileReader = new FileReader();
@@ -30,7 +33,7 @@ async function handleRequest(request) {
   return new Response(docxBlob, {
     headers: {
       'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      'Content-Disposition': `attachment; filename="${request.headers.get('pdf-file-name')}"`,
+      'Content-Disposition': `attachment; filename="${fileName}"`,
     },
   });
 }
