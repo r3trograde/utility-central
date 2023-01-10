@@ -7,7 +7,10 @@ convertButton.addEventListener('click', () => {
 
     fetch('https://pdf-to-word-converter.alittle44.workers.dev', {
         method: 'POST',
-        body: formData
+        body: formData,
+        headers: {
+            'Content-Type': 'application/pdf'
+        }
     })
         .then(response => {
             if (response.ok) {
