@@ -12,7 +12,6 @@
   </script>
   <title>PDF to Word Converter | Utility Central</title>
   <link rel="stylesheet" type="text/css" href="styles/styles.css">
-  <script src="scripts/converter.js"></script>
 </head>
 
 <body>
@@ -30,13 +29,11 @@
   </nav>
   <main>
     <h2>Use this form to convert a PDF file to a Microsoft Word file:</h2>
-    <form id="converter-form">
-      <label for="file">Select a PDF file:</label><br>
-      <input type="file" id="file" name="file"><br>
-      <button type="submit">Convert</button>
-    </form>
-    <p id="status"></p>
-    <a id="download" style="display: none;">Download Word File</a>
+    <input type="file" id="pdf-file-input" accept="application/pdf" />
+    <button id="convert-button">Convert PDF to DOCX</button>
+    <a id="download-link" style="display: none;">Download DOCX</a>
+
+    <script src="scripts/pdf-converter.js"></script>
   </main>
   <footer>
     <p>Copyright 2023 Utility Central</p>
