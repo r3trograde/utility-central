@@ -5,7 +5,7 @@ convertButton.addEventListener('click', () => {
     const formData = new FormData()
     formData.append('pdf', pdfFile)
 
-    fetch('https://pdf-to-word-converter.alittle44.workers.dev', {
+    fetch('pdf-to-word-converter.alittle44.workers.dev', {
         method: 'POST',
         body: formData,
         headers: {
