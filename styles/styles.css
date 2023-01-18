@@ -62,11 +62,6 @@ main {
   width: 45%;
 }
 
-.tool-container {
-  display: flex;
-  justify-content: space-between;
-}
-
 .tool h3 {
   margin: 0;
   font-size: 24px;
